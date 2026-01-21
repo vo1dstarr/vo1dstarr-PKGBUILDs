@@ -3,13 +3,13 @@
 # Contributor: vo1dstarr
 pkgname=obs-localvocal-amd-bin
 pkgver=0.6.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Speech AI assistant OBS Plugin"
 arch=('x86_64')
 url="https://github.com/royshil/obs-localvocal"
 license=('GPL')
 #depends=('aarch64-linux-gnu-gcc' 'nvhpc-compilers' 'obs-studio-browser' 'ocl-icd>=1.0' 'ollama' 'openblas' 'qt6-base' 'vulkan-icd-loader')
-depends=('obs-studio-browser' 'ocl-icd>=1.0' 'openblas' 'qt6-base' 'vulkan-icd-loader' 'hipblas' 'xdg-utils')
+depends=('obs-studio-browser' 'ocl-icd>=1.0' 'openblas' 'qt6-base' 'vulkan-icd-loader' 'hipblas' 'xdg-utils' 'icu70')
 provides=('obs-localvocal')
 options=('!strip' '!emptydirs')
 install=${pkgname}.install
