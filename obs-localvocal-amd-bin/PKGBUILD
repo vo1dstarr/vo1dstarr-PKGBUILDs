@@ -3,7 +3,7 @@
 # Contributor: vo1dstarr
 pkgname=obs-localvocal-amd-bin
 pkgver=0.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Speech AI assistant OBS Plugin"
 arch=('x86_64')
 url="https://github.com/royshil/obs-localvocal"
@@ -20,5 +20,10 @@ package(){
 
 	# Extract package data
 	tar -xz -f data.tar.gz -C "${pkgdir}"
+
+	# Convert from debian to arch file structure
+	mkdir -p "${pkgdir}/usr/lib"
+    mv "${pkgdir}/usr/lib/x86_64-linux-gnu/"* "${pkgdir}/usr/lib/"
+    rmdir "${pkgdir}/usr/lib/x86_64-linux-gnu"
 
 }

@@ -1,7 +1,7 @@
 pkgbase = obs-localvocal-amd-bin
 	pkgdesc = Speech AI assistant OBS Plugin
 	pkgver = 0.6.0
-	pkgrel = 2
+	pkgrel = 3
 	url = https://github.com/royshil/obs-localvocal
 	install = obs-localvocal-amd-bin.install
 	arch = x86_64
