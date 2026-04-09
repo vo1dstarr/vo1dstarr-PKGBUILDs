@@ -1,0 +1,54 @@
+# Maintainer: vo1dstarr <void at vo1dstarr dot com>
+# Contributor: Pierce Thompson <pierce at insprill dot net>
+
+pkgname=bs-manager-git
+pkgver=v1.5.6.r6.g33271bd
+pkgrel=1
+pkgdesc="An all-in-one tool for managing Beat Saber versions, maps, mods, and more"
+arch=("x86_64")
+url="https://github.com/Zagrios/bs-manager"
+license=('GPL')
+depends=()
+makedepends=('git' 'npm' 'mise' 'libxcrypt-compat')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+options=('!strip') # DepotDownloader breaks without this
+source=(
+  'git+https://github.com/Zagrios/bs-manager.git'
+  "${pkgname%-git}.desktop"
+)
+sha256sums=(
+  'SKIP'
+  '1a1ef27372d76ef1b53bf4cfe397d7c8f721e2d0bf8f61446e3a31d882cc726d'
+)
+
+pkgver() {
+    cd "${pkgname%-git}"
+    git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+    cd "${pkgname%-git}"
+
+    mise install
+}
+
+build() {
+    cd "${pkgname%-git}"
+
+    npm install
+    npm run build
+    npx electron-builder --config electron-builder.config.js --publish never --linux pacman --x64
+}
+
+package() {
+    cd "${pkgname%-git}"
+
+    install -d "$pkgdir/opt/${pkgname%-git}"
+    cp -r "release/build/linux-unpacked/". "$pkgdir/opt/${pkgname%-git}/"
+
+    install -Dm644 "$srcdir/${pkgname%-git}.desktop" "$pkgdir/usr/share/applications/${pkgname%-git}.desktop"
+    install -Dm644 "resources/readme/SVG/icon.svg" "$pkgdir/usr/share/pixmaps/${pkgname%-git}.svg"
+    install -Dm644 "LICENSE" -t "$pkgdir/usr/share/licenses/${pkgname%-git}"
+    install -Dm644 "README.md" -t "$pkgdir/usr/share/doc/${pkgname%-git}"
+}
