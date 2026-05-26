@@ -2,7 +2,7 @@
 # Contributor: Pierce Thompson <pierce at insprill dot net>
 
 pkgname=bs-manager-git
-pkgver=v1.5.6.r6.g33271bd
+pkgver=v1.5.6.r13.gf30a3f6
 pkgrel=1
 pkgdesc="An all-in-one tool for managing Beat Saber versions, maps, mods, and more"
 arch=("x86_64")
@@ -30,11 +30,14 @@ pkgver() {
 prepare() {
     cd "${pkgname%-git}"
 
+    eval "$(mise activate bash)"
     mise install
 }
 
 build() {
     cd "${pkgname%-git}"
+
+    eval "$(mise activate bash)"
 
     npm install
     npm run build
