@@ -1,0 +1,20 @@
+pkgbase = obs-vertical-canvas
+	pkgdesc = OBS plugin adding a vertical canvas for streaming and recording to vertical platforms
+	pkgver = 1.6.4
+	pkgrel = 1
+	url = https://github.com/Aitum/obs-vertical-canvas
+	arch = x86_64
+	license = GPL-2.0-only
+	makedepends = cmake
+	depends = obs-studio
+	depends = qt6-base
+	depends = curl
+	depends = gcc-libs
+	depends = glibc
+	depends = libglvnd
+	provides = obs-plugin-vertical-canvas
+	conflicts = obs-plugin-vertical-canvas
+	source = obs-vertical-canvas-1.6.4.tar.xz::https://github.com/Aitum/obs-vertical-canvas/releases/download/1.6.4/vertical-canvas-source.tar.xz
+	sha256sums = 1b5ad45fbef41823bac2ac293a0fe2cdedbe6c8b9546b6cfb1e7dd2d462793d1
+
+pkgname = obs-vertical-canvas

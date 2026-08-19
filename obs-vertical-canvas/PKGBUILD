@@ -1,0 +1,29 @@
+# Maintainer: vo1dstarr <void at vo1dstarr dot com>
+
+pkgname=obs-vertical-canvas
+pkgver=1.6.4
+pkgrel=1
+pkgdesc="OBS plugin adding a vertical canvas for streaming and recording to vertical platforms"
+arch=('x86_64')
+url="https://github.com/Aitum/obs-vertical-canvas"
+license=('GPL-2.0-only')
+depends=('obs-studio' 'qt6-base' 'curl' 'gcc-libs' 'glibc' 'libglvnd')
+makedepends=('cmake')
+provides=('obs-plugin-vertical-canvas')
+conflicts=('obs-plugin-vertical-canvas')
+source=("$pkgname-$pkgver.tar.xz::$url/releases/download/$pkgver/vertical-canvas-source.tar.xz")
+sha256sums=('1b5ad45fbef41823bac2ac293a0fe2cdedbe6c8b9546b6cfb1e7dd2d462793d1')
+
+build() {
+    cmake -S "vertical-canvas-$pkgver-source" -B build \
+        -DCMAKE_BUILD_TYPE=None \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -Wno-dev
+    cmake --build build
+}
+
+package() {
+    DESTDIR="$pkgdir" cmake --install build
+
+    install -Dm644 "vertical-canvas-$pkgver-source/LICENSE" -t "$pkgdir/usr/share/licenses/$pkgname"
+}
